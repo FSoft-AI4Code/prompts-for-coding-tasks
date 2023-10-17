@@ -209,7 +209,7 @@ Suggest Top 5 sources and queries that can back-up your next answer from this qu
 Your answer is:
 Queries: 
 ....
-Source:
+Sources:
 ....
 
 1. The queries must best match the specific information prompted in the question
