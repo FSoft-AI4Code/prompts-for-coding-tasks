@@ -1350,7 +1350,28 @@ bind failed. Error: Address already in use
 ```
 The code snippet is not functioning correctly. Your task is to debug and fix the code to make it work as intended.
 
-#5 Writing a mapper function between two data structures
+
+## Fix
+
+Your task is to debug and fix the code to make it work intended:
+```c
+if( bind(socket_desc,(struct sockaddr *) &server, sizeof(server)) < 0)
+{
+    perror("bind failed. Error");
+    return 1;
+}
+puts("bind done");
+```
+Error message:
+```bash
+$ ./serve   
+Socket created    
+bind failed. Error: Address already in use
+```
+
+------------------------------------------------------------------------------------------------------------
+
+## 65 Writing a mapper function between two data structures
 Write a mapper function between Class 1 and Class 2 in Java for the following code:
 ```java
 // Class 1
