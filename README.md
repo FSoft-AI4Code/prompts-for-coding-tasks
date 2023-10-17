@@ -3,7 +3,7 @@
 ------------------------------------------------------------------------------------------------------------
 
 ## Prompt 1 Improve variable names
-Analyze the variable names and recommend new names that are more clear and descriptive. To do that, you must execute **Instructions** and follow **Rules** provided below.
+Analyze the variable names and recommend new names that are more clear and descriptive. Follow the **Instructions** and **Rules** below.
 
 **Instructions**
 - Analyze the provided source code snippet to understand the purpose of each variable.
@@ -19,6 +19,7 @@ Analyze the variable names and recommend new names that are more clear and descr
 - Consistent naming conventions should be used.
 
 Code: 
+
 ```java
 public class Example {
   public static void main(String[] args) {
@@ -62,8 +63,9 @@ Write a SQL query to list companies whose average ticket close_at time is greate
 ------------------------------------------------------------------------------------------------------------
 
 ## Prompt 3 Code translate
-Translate the following Python code snippet to Rust:
+Translate the code snippet given from Python to Rust. Highlight the parts that need to be changed to make the code work in Rust.
 
+Code:
 ```python
 def factorial(n):
     if n == 0:
@@ -75,252 +77,48 @@ def factorial(n):
 ------------------------------------------------------------------------------------------------------------
 
 ## Prompt 4 Test case suggestion
-Given a function, its parameter name and type, its return type.
-The task is help developer brainstorming which test does this function have to test.
-Generate no less than 5 testing idea for this function. 
-The generated idea must contains 3 categories: 
-- "Happy path": these test will cover basic usage of the function
-- "Edge Cases": these test will cover how the function works when pushed beyond its normal operating parameters.
-- "Exception": these test will scenerios exception which is catched by the function
+Generate a list of test scenarios for this code:
 
-
-Function name: compare
-Return type: int
-Parameters:
-- a (int)
-- b (int)
-Code: 
-public int compare(int n1, int n2) {
-    if (n1 > n2) return 1;
-    else if (n1 < n2) return -1;
-    return 0;
-}
-Test scenario list:
-Happy Path:
-- Test with n1 > n2 and verify that the function returns 1, indicating that n1 is greater than n2.
-- Test with n1 < n2 and verify that the function returns -1, indicating that n1 is less than n2.
-- Test with n1 = n2 and verify that the function returns 0, indicating that n1 is equal to n2.
-Edge Cases:
-- Test with large integer values and verify that the function handles the comparison correctly without encountering any issues.
-- Test with the maximum integer value and ensure that the function handles it correctly without causing any unexpected behavior.
-Exceptions:
-- Test with null values and verify that the function handles the null values gracefully, such as by throwing an appropriate exception or returning an error code.
-- Test with invalid input type and verify that the function handles the type mismatch correctly, either by throwing a type-related exception or returning an error code.
-
-Function name: add
-Return type: int
-Parameters:
-- a (int)
-- b (int)
-Code: 
 public int add(int a, int b) {
     return a + b;
 }
-Test scenario list:
+
+ The list should have at least 2 test scenarios for each of the 3 mandatory categories: 
+
+-Happy paths: tests that cover basic, expected usage of the function
+-Edge cases: tests that cover unusual but legal usage of the function
+-Exception: tests that cover invalid inputs that should cause the function to throw an exception.
+
 ------------------------------------------------------------------------------------------------------------
 
 ## Prompt 5 Test data generation
 
-Given a function, its parameter name and type, its return type.
-The task is help developer define default parameters' value which are unittest input.
-The developer will given their ideas for testing and generate one example correspond to each idea.
-The generated input must store in programming format and be able to pass to the function.
-The generated output must store in programming format and be able to input in assertion check.
+Given the code below, generate in tabular format a list of test cases with one column for test scenario, one column for sample inputs in json format, and one column for expected outputs in json format
 
-Function name: add
-Return type: int
-Parameters:
-- a (int)
-- b (int)
 Code: 
 public int add(int a, int b) {
     return a + b;
 }
-Test scenario list:
-Happy Path:
-- Test with positive integers and verify that the function returns the correct sum
-- Test with negative integers and verify that the function returns the correct sum
-- Test with zero values and verify that the function handles the addition correctly
-Edge Cases:
-- Test with large values and verify that the function handles arithmetic operations correctly without overflowing or encountering any issues.
-- Test with the maximum integer value and ensure that the function handles it correctly without overflowing or causing any unexpected behavior.
-Exceptions:
-- Test with null values and verify that the function handles the null values by throwing an appropriate exception or returning an error code.
-- Test with invalid input type verify that the function handles the type mismatch correctly, either by throwing a type-related exception or returning an error code.
 
-Input/output for testcase:
-- input: {a=5, b=3}, output: {8}
-- input: {a=-3, b=-5}, output: {-8}
-- input: {a=0, a=7}, output: {7}
-- input: {a=1000000, b=2000000}, output: {3000000}
-- input: {a=Integer.MAX_VALUE, b=Integer.MAX_VALUE}, output: {-2}
-- input: {a=null, b=5}, output: {NullPointerException}
-- input: {a="2", b=3.14}, output: {TypeMismatchException}
+ The list should have at least 2 test cases for each of the 3 mandatory categories: 
 
-
-Function name: compare
-Return type: int
-Parameters:
-- a (int)
-- b (int)
-Code: 
-public int compare(int n1, int n2) {
-    if (n1 > n2) return 1;
-    else if (n1 < n2) return -1;
-    return 0;
-}
-Test scenario list:
-Happy Path:
-- Test with n1 > n2 and verify that the function returns 1, indicating that n1 is greater than n2.
-- Test with n1 < n2 and verify that the function returns -1, indicating that n1 is less than n2.
-- Test with n1 = n2 and verify that the function returns 0, indicating that n1 is equal to n2.
-Edge Cases:
-- Test with large integer values and verify that the function handles the comparison correctly without encountering any issues.
-- Test with the maximum integer value and ensure that the function handles it correctly without causing any unexpected behavior.
-Exceptions:
-- Test with null values and verify that the function handles the null values gracefully, such as by throwing an appropriate exception or returning an error code.
-- Test with invalid input type and verify that the function handles the type mismatch correctly, either by throwing a type-related exception or returning an error code.
-Input/output for testcase:
+-Happy paths: tests that cover basic, expected usage of the function
+-Edge cases: tests that cover unusual but legal usage of the function
+-Exception: tests that cover invalid inputs that should cause the function to throw an exception.
 
 ------------------------------------------------------------------------------------------------------------
 
 ## Prompt 6 Test script generation
-Given a function, its parameter name and type, its return type.
-The task is to help developer write the test script to functional testing this function
-The developer will given their input and output for testing and you must generate a valid code that can take given test cases as input.
-The generated code must be valid, executable and in appropriate language.
+Given the code below and a test case, write a test script to functional test in the same programming language.
 
-Function name: add
-Return type: int
-Parameters:
-- a (int)
-- b (int)
-Code: 
-public int add(int a, int b) {
-    return a + b;
-}
-Test scenario list:
-Happy Path:
-- Test with positive integers and verify that the function returns the correct sum
-- Test with negative integers and verify that the function returns the correct sum
-- Test with zero values and verify that the function handles the addition correctly
-Edge Cases:
-- Test with large values and verify that the function handles arithmetic operations correctly without overflowing or encountering any issues.
-- Test with the maximum integer value and ensure that the function handles it correctly without overflowing or causing any unexpected behavior.
-Exceptions:
-- Test with null values and verify that the function handles the null values by throwing an appropriate exception or returning an error code.
-- Test with invalid input type verify that the function handles the type mismatch correctly, either by throwing a type-related exception or returning an error code.
-Input/output for testcase:
-- input: {a=5, b=3}, output: {8}
-- input: {a=-3, b=-5}, output: {-8}
-- input: {a=0, a=7}, output: {7}
-- input: {a=1000000, b=2000000}, output: {3000000}
-- input: {a=Integer.MAX_VALUE, b=Integer.MAX_VALUE}, output: {-2}
-- input: {a=null, b=5}, output: {NullPointerException}
-- input: {a="2", b=3.14}, output: {TypeMismatchException}
-
-Test script:
-```java
-import java.util.Objects;
-
-public class TestAddFunction {
-    public static void main(String[] args) {
-        TestAddFunction tester = new TestAddFunction();
-        tester.testHappyPath();
-        tester.testEdgeCases();
-        tester.testExceptions();
-    }
-
-    // Function to test the "add" method with positive integers, negative integers, and zero values
-    private void testHappyPath() {
-        // Test with positive integers
-        validateTest("Test with positive integers", 5, 3, 8);
-
-        // Test with negative integers
-        validateTest("Test with negative integers", -3, -5, -8);
-
-        // Test with zero values
-        validateTest("Test with zero values", 0, 7, 7);
-    }
-
-    // Function to test the "add" method with large values and the maximum integer value
-    private void testEdgeCases() {
-        // Test with large values
-        validateTest("Test with large values", 1000000, 2000000, 3000000);
-
-        // Test with the maximum integer value
-        validateTest("Test with maximum integer value", Integer.MAX_VALUE, Integer.MAX_VALUE, -2);
-    }
-
-    // Function to test the "add" method with null values and invalid input type
-    private void testExceptions() {
-        // Test with null values
-        try {
-            add(null, 5);
-            System.out.println("Test with null values failed. Expected NullPointerException");
-        } catch (NullPointerException e) {
-            System.out.println("Test with null values successful. Caught NullPointerException: " + e.getMessage());
-        }
-
-        // Test with invalid input type
-        try {
-            add("2", 3.14);
-            System.out.println("Test with invalid input type failed. Expected TypeMismatchException");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Test with invalid input type successful. Caught IllegalArgumentException: " + e.getMessage());
-        }
-    }
-
-    // Function to validate test cases and display results
-    private void validateTest(String testName, int a, int b, int expected) {
-        int result = add(a, b);
-        if (result == expected) {
-            System.out.println(testName + " successful.");
-        } else {
-            System.out.println(testName + " failed. Expected: " + expected + ", Actual: " + result);
-        }
-    }
-
-    // Function to test the add function
-    public int add(int a, int b) {
-        return a + b;
-    }
-}
-```
-
-Function name: compare
-Return type: int
-Parameters:
-- a (int)
-- b (int)
 Code: 
 public int compare(int n1, int n2) {
     if (n1 > n2) return 1;
     else if (n1 < n2) return -1;
     return 0;
 }
-Test scenario list:
-Happy Path:
-- Test with n1 > n2 and verify that the function returns 1, indicating that n1 is greater than n2.
-- Test with n1 < n2 and verify that the function returns -1, indicating that n1 is less than n2.
-- Test with n1 = n2 and verify that the function returns 0, indicating that n1 is equal to n2.
-Edge Cases:
-- Test with large integer values and verify that the function handles the comparison correctly without encountering any issues.
+Test case:
 - Test with the maximum integer value and ensure that the function handles it correctly without causing any unexpected behavior.
-Exceptions:
-- Test with null values and verify that the function handles the null values gracefully, such as by throwing an appropriate exception or returning an error code.
-- Test with invalid input type and verify that the function handles the type mismatch correctly, either by throwing a type-related exception or returning an error code.
-
-Input/output for testcase:
-- input: {a=5, b=3}, output: {1}
-- input: {a=3, b=5}, output: {-1}
-- input: {a=5, a=5}, output: {0}
-- input: {a=1000000, b=2000000}, output: {-1}
-- input: {a=Integer.MAX_VALUE, b=Integer.MAX_VALUE}, output: {0}
-- input: {a=null, b=5}, output: {NullPointerException}
-- input: {a="2", b=3.14}, output: {TypeMismatchException}
-
-Test script:
 
 ------------------------------------------------------------------------------------------------------------
 ## Prompt 7 Convert JSON to XML
@@ -351,39 +149,31 @@ Convert the following JSON to XML format:
 }
 ```
 ------------------------------------------------------------------------------------------------------------
-## Prompt  8 Find potential issues
+## Prompt 8 Find potential issues
 
-Analyze the *Code* section and identify potential issues or areas for improvement. Follow the **Instructions** and **Rules** provided below.
+Review the following code snippet and identify any code smells or potential issues:
 
-**Instructions**
-1. Review the provided codebase to understand its structure and functionality.
-2. Analyze the code for potential issues, such as performance bottlenecks, security vulnerabilities, or code smells.
-3. Identify areas for improvement or optimization to enhance the application.
-4. Document the potential issues and suggestions for improvement.
+```python
+def calculate_average(numbers):
+    total = 0
+    count = 0
+    for num in numbers:
+        total += num
+        count += 1
+    if count != 0:
+        average = total / count
+        return average
+    else:
+        return 0
+```
 
-**Rules**
-- Use the existing programming language and framework used in the codebase.
-- Perform a thorough analysis of the codebase to identify potential issues or areas for improvement.
-- Document your findings and suggestions clearly and concisely.
-- Provide reasoning and explanations for your identified issues and suggestions.
-
-*Code*:
-[insert code]
+Provide your analysis of any code smells you find and suggest possible improvements or refactoring if necessary.
 
 ------------------------------------------------------------------------------------------------------------
 ## Prompt 9 Q&A
 Q: How can race conditions and synchronization issues be avoided when using multiple threads?
-A: Race conditions and synchronization issues can be avoided when using multiple threads by properly synchronizing access to shared resources. In Golang, this can be achieved through the use of synchronization primitives such as mutexes, channels, and atomic operations.
 
-Mutexes are used to ensure that only one thread can access a shared resource at a time. A mutex can be locked by one thread, preventing other threads from accessing the resource until the mutex is released.
-
-Channels are used to safely pass data between threads without the risk of race conditions. They provide a way for threads to communicate and synchronize their actions.
-
-Atomic operations provide a way to perform a read-modify-write operation on a shared variable in an atomic manner, preventing race conditions that could occur when multiple threads are attempting to modify the same variable simultaneously.
-
-In addition to proper use of synchronization primitives, it is also important to carefully design the program logic to minimize the need for shared resources and to avoid the creation of deadlock conditions.
-
-Overall, avoiding race conditions and synchronization issues when using multiple threads requires careful design and proper use of synchronization primitives.
+A:
 
 ------------------------------------------------------------------------------------------------------------
 
