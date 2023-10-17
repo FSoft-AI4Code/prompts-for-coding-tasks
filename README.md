@@ -193,7 +193,7 @@ A:
 
 I would require you to search the Internet to find sources that can back-up your next answer.
 My question is: 
-```{question}```:
+```question```:
 You should follow the Instructions below and think step by step to make sure we don't miss anything.
 Begin Instruction
 - The queries should best match the specific information prompted in the question
@@ -202,6 +202,20 @@ Begin Instruction
 - The queries should be arranged in a Markdown list of bullet points
 - Make sure that your answer only has Google queries found and does not include any apologies or explanations.
 End Instruction
+
+## Fix:
+Suggest Top 5 sources and queries that can back-up your next answer from this question:
+```question```
+Your answer is:
+Queries: 
+....
+Source:
+....
+
+1. The queries must best match the specific information prompted in the question
+2. The queries must be semantically different
+3. Results in Markdown list of bullet points
+4. Make sure that your answer not include any apologies or explanations
 
 ------------------------------------------------------------------------------------------------------------
 ## Prompt 12 Double-check generated answers 
@@ -218,6 +232,18 @@ You should follow the Instructions below and think step by step to make sure we 
 ###End Instruction###
 Query Suggestions for Google search: \n
 
+
+## Fix:
+
+Cross check your previous answers by searching them on the Internet.
+Previous answer is: ```{prev_answer}```
+
+1. The queries should best match the specific information in the previous answer
+2. The queries must semantically different
+3. The queries should be arranged in a Markdown list of bullet points
+4. Make sure that queries does not include any apologies or explanations.
+
+Query Suggestions for Google search: \n
 ------------------------------------------------------------------------------------------------------------
 ## Prompt 13 Generate Java code for building a mobile app using Spring Boot
 
