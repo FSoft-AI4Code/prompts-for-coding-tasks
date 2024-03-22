@@ -1,0 +1,329 @@
+{% include 'header.html' %}
+<div>
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 d-flex flex-column">
+          <br><br>
+          <h1 data-aos="fade-up">Accurately Score Your IELTS Writing Tasks</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">Assess the IELTS essay based on official criterias and provide
+            points to boost your band</h2>
+          <br>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="mb-3" data-aos="fade-up" data-aos-delay="400">
+                <a type="button" href="#" onclick="load_sample()">Load a sample</a>
+              </div>
+              <div class="mb-3" data-aos="fade-up" data-aos-delay="400">
+                <label class="form-label">Writing Task</label>
+                <select class="form-select" aria-label="Default select example" id="input_task" disabled>
+                  <option value="1" disabled>1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+              <div class="mb-3" data-aos="fade-up" data-aos-delay="400">
+                <label class="form-label">Input The Question</label>
+                <textarea id="input_question" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+              </div>
+              <div class="mb-3" data-aos="fade-up" data-aos-delay="400">
+                <label class="form-label">Input Your Essay</label><br>
+                <textarea id="input_essay" class="form-control" id="exampleFormControlTextarea1" rows="12"></textarea>
+              </div>
+              <div data-aos="fade-up" data-aos-delay="400" class="text-center">
+                <div class="text-center">
+                  <button onclick="assess_essay()" type="button" style="width: 100% !important;" id="score_button"
+                    class="btn btn-primary">
+                    <span>Score </span>
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+
+              <div class="mb-3" data-aos="fade-up" data-aos-delay="400">
+                <label class="form-label">WritingGPT General Reviews</label>
+                <div class="progress" id="scoring_progress" style="visibility: hidden;">
+                  <div class="progress-bar progress-bar-striped bg-info progress-bar-animated" id="scoring_progress_bar"
+                    role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="hero-img" id="home_gif" data-aos="zoom-out" data-aos-delay="200">
+                  <img src="../static/assets/img/home.gif" class="img-fluid" alt="" style="max-height: 500px;">
+                </div>
+              </div>
+              <div style="visibility: hidden;" id="general_assess">
+                <p><b>Your Estimated IELTS Band: <a href="#" id="general_band"></a></b></p>
+                <div class="mb-3">
+                  <label class="form-label"><b>Strength</b></label>
+                  <p id="general_strength">
+                  </p>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label"><b>Weaknesses</b></label>
+                  <p id="general_weaknesses">
+                  </p>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label"><b>How to Improve</b></label>
+                  <p id="general_how_to_improve">
+                  </p>
+                  <a href="#detail_assessment" id="more_specific">More Specific ...</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <!-- <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+          <img src="assets/img/home.gif" class="img-fluid" alt="">
+        </div> -->
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <main id="main">
+    <!-- ======= Values Section ======= -->
+    <section id="values" class="values">
+
+      <div class="container" data-aos="fade-up" id="detail_assessment">
+
+        <header class="section-header">
+          <h2>Detail Assessment</h2>
+
+        </header>
+
+        <div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Task Achievement</th>
+                <th scope="col">Coherence and Cohension</th>
+                <th scope="col">Lexical Resources</th>
+                <th scope="col">Grammatical Range and Accuracy </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row"><b>Strength</b></td>
+                <td id="task_achievement_strength"></td>
+                <td id="cohesion_strength"></td>
+                <td id="lexical_strength"></td>
+                <td id="grammar_strength"></td>
+              </tr>
+              <tr>
+                <td scope="row"><b>Weaknesses</b></td>
+                <td id="task_achievement_weaknesses"></td>
+                <td id="cohesion_weaknesses"></td>
+                <td id="lexical_weaknesses"></td>
+                <td id="grammar_weaknesses"></td>
+              </tr>
+              <tr>
+                <td scope="row"><b>Band</b></td>
+                <td id="task_achievement_band"></td>
+                <td id="cohesion_band"></td>
+                <td id="lexical_band"></td>
+                <td id="grammar_band"></td>
+              </tr>
+              <tr>
+                <td scope="row"><b>How to Improve</b></td>
+                <td id="task_achievement_how_to_improve"></td>
+                <td id="cohesion_how_to_improve"></td>
+                <td id="lexical_how_to_improve"></td>
+                <td id="grammar_how_to_improve"></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+        </div>
+
+      </div>
+
+    </section><!-- End Values Section -->
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-12 text-center">
+            <h4>Are You Interested?</h4>
+            <p>Provide your email or phone number to us, then we can contact you as soon as possible</p>
+          </div>
+          <div class="col-lg-6">
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Submit">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5 col-md-12 footer-info">
+            <a href="index.html" class="logo d-flex align-items-center">
+              <img src="static/WritingGPT_favicon.png" alt="">
+              <span>WritingGPT</span>
+            </a>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies
+              darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+            <h4>Contact Us</h4>
+            <p>
+              VCCI Tower, 09 Dao Duy Anh <br>
+              Hanoi, HN 100000<br>
+              Viet Nam <br><br>
+              <strong>Phone:</strong> 0949622836<br>
+              <strong>Email:</strong> contact.writinggpt@gmail.com<br>
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>WritingGPT</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+  <script>
+    var reviewing = true;
+    var current_progress = 0
+    var answering_interval = null
+
+    function auto_progress() {
+      $("#scoring_progress_bar").attr("aria-valuenow", current_progress.toString())
+      $("#scoring_progress_bar").css("width", current_progress.toString() + "%")
+
+      if (current_progress < 90) {
+        current_progress += 1
+      }
+
+    }
+
+    function assess_essay() {
+      $("#general_assess").css("visibility", "hidden");
+      $("#home_gif").show();
+
+      task_id = $("#input_task").val();
+      question = $("textarea#input_question").val();
+      essay = $("textarea#input_essay").val();
+      $("#score_button").attr("disabled", "disabled");
+      $("textarea#input_question").attr("disabled", "disabled");
+      $("textarea#input_essay").attr("disabled", "disabled");
+
+
+      $("#scoring_progress").css("visibility", "visible");
+      answering_interval = setInterval(auto_progress, 600);
+      $.ajax({
+        type: 'POST',
+        url: "{{url_for('score_essay')}}",
+        data: {
+          task_id: task_id,
+          question: question,
+          essay: essay
+        },
+        success: function (resultData) {
+          resultData = JSON.parse(resultData)
+          console.log(resultData)
+          clearInterval(answering_interval)
+          $("#scoring_progress_bar").attr("aria-valuenow", "100");
+          $("#scoring_progress_bar").css("width", "100%");
+
+          $("#home_gif").hide();
+          $("#scoring_progress").css("visibility", "hidden");
+
+          $("#general_strength").text(resultData["general_assess"]["answer"]["strength"]);
+          $("#general_weaknesses").text(resultData["general_assess"]["answer"]["weaknesses"]);
+          $("#general_how_to_improve").text(resultData["general_assess"]["answer"]["how_to_improve"]);
+          $("#general_band").text(resultData["general_assess"]["answer"]["band"]);
+
+          $("#task_achievement_strength").text(resultData["task_assess"]["answer"]["strength"]);
+          $("#cohesion_strength").text(resultData["coherence_assess"]["answer"]["strength"]);
+          $("#lexical_strength").text(resultData["lexical_assess"]["answer"]["strength"]);
+          $("#grammar_strength").text(resultData["gram_assess"]["answer"]["strength"]);
+
+          $("#task_achievement_weaknesses").text(resultData["task_assess"]["answer"]["weaknesses"]);
+          $("#cohesion_weaknesses").text(resultData["coherence_assess"]["answer"]["weaknesses"]);
+          $("#lexical_weaknesses").text(resultData["lexical_assess"]["answer"]["weaknesses"]);
+          $("#grammar_weaknesses").text(resultData["gram_assess"]["answer"]["weaknesses"]);
+
+          $("#task_achievement_how_to_improve").text(resultData["task_assess"]["answer"]["how_to_improve"]);
+          $("#cohesion_how_to_improve").text(resultData["coherence_assess"]["answer"]["how_to_improve"]);
+          $("#lexical_how_to_improve").text(resultData["lexical_assess"]["answer"]["how_to_improve"]);
+          $("#grammar_how_to_improve").text(resultData["gram_assess"]["answer"]["how_to_improve"]);
+
+          $("#task_achievement_band").text(resultData["task_assess"]["answer"]["band"]);
+          $("#cohesion_band").text(resultData["coherence_assess"]["answer"]["band"]);
+          $("#lexical_band").text(resultData["lexical_assess"]["answer"]["band"]);
+          $("#grammar_band").text(resultData["gram_assess"]["answer"]["band"]);
+
+          $("#general_assess").css("visibility", "visible");
+          $("#score_button").removeAttr("disabled");
+          $("textarea#input_question").removeAttr("disabled");
+          $("textarea#input_essay").removeAttr("disabled");
+          current_progress = 0;
+        }
+      });
+    }
+
+    function load_sample() {
+      $("#input_task").val("2");
+      $("textarea#input_question").val("What are the advantages and disadvantages of online study");
+      $("textarea#input_essay").val("Firstly, online study has a lot of positive aspects including time-saving and cost-effectiveness. Instead of taking time to go to a specific place for studying, a computer or even a smartphone is enough to start learning. Therefore, people can save a lot of traveling time, especially in big cities, where the congestion is regular. Moreover, the needlessness of physical places may reduce the construction fees. For instance, the schools or learning centers don’t need to build large classrooms or large parking places anymore. As a result, tuition fees may be reduced. Along with the benefits, online study may lead to distraction. The first reason is that online learning has more factors which cause loss of concentration than offline learning. For example, people are easily attracted to social networks while learning online. In addition, by using only the computer camera, it’s difficult for the teachers to track student’s attention. Consequently, the study effectiveness depends much on the self-study ability of students.");
+    }
+
+
+  </script>
+
+  </body>
+
+  </html>
